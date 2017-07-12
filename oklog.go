@@ -77,7 +77,7 @@ func (a *OklogAdapter) Stream(logstream chan *router.Message) {
 			continue
 		}
 		log.Printf("oklog: writing %s", buf)
-		if _, err := a.writer.Write(buf); err != nil {
+		if _, err := a.writer.Write(append(buf, byte('\n'))); err != nil {
 			log.Println("oklog:", err)
 			continue
 		}
